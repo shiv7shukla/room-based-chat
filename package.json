@@ -12,8 +12,12 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@types/mongoose": "^5.11.96",
     "@types/ws": "^8.18.1",
+    "dotenv": "^17.2.1",
+    "mongoose": "^8.16.5",
     "nanoid": "^5.1.5",
+    "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
     "ws": "^8.18.3"
   }

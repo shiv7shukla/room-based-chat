@@ -1,5 +1,21 @@
 import WebSocket, { WebSocketServer } from "ws";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
 import { nanoid } from "nanoid";
+
+dotenv.config();
+const MONGO_URL=process.env.MONGO_URL;
+
+(async()=>{
+    try{
+        //@ts-ignore
+        await mongoose.connect(MONGO_URL);
+        console.log("connected");
+    }
+    catch{
+        console.log("can't connect to database");
+    }
+})();
 
 const wss=new WebSocketServer({port:8080});
 
@@ -31,6 +47,7 @@ wss.on("connection",(socket)=>{
             if(!Users.get(socket))
                 return;
             Users.forEach((value)=>{
+                if(value.socket!=socket)
                 value.socket?.send(parsedMessage.payload.text);
             })
         }
